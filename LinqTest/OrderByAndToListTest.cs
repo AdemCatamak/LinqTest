@@ -15,9 +15,7 @@ public class OrderByAndToListTest
         List<int> actualList = expectedCollection.OrderBy(i => i)
                                                  .ToList();
 
-        Assert.Equal(5, actualList.Count);
         Assert.Equal(expectedCollection.Count, actualList.Count);
-        Assert.All(expectedCollection, i => Assert.Contains(i, actualList));
     }
 
     [Fact]
@@ -35,9 +33,7 @@ public class OrderByAndToListTest
                                      .OrderBy(c => c.IntValue)
                                      .ToList();
 
-        Assert.Equal(5, actualList.Count);
         Assert.Equal(expectedCollection.Count, actualList.Count);
-        Assert.All(expectedCollection, i => Assert.Contains(i, actualList));
     }
 
     [Fact]
@@ -54,8 +50,6 @@ public class OrderByAndToListTest
         List<DummyRecord> actualList = expectedCollection.OrderBy(r => r.IntValue)
                                                          .ToList();
 
-        Assert.Equal(5, actualList.Count);
         Assert.Equal(expectedCollection.Count, actualList.Count);
-        Assert.All(expectedCollection, i => Assert.Contains(i, actualList));
     }
 }

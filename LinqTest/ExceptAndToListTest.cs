@@ -15,6 +15,7 @@ public class ExceptAndToListTest
         _output = output;
     }
 
+    // Passed
     [Fact]
     public void ClassObjectExceptToListTest()
     {
@@ -32,11 +33,10 @@ public class ExceptAndToListTest
                                      .Except(emptyList)
                                      .ToList();
 
-        Assert.Equal(5, actualList.Count);
         Assert.Equal(expectedCollection.Count, actualList.Count);
-        Assert.All(expectedCollection, i => Assert.Contains(i, actualList));
     }
 
+    // Failed
     [Fact]
     public void IntegerToListTest()
     {
@@ -50,11 +50,10 @@ public class ExceptAndToListTest
         var collectionStr = string.Join(" | ", actualList);
         _output.WriteLine($"int list -> {collectionStr}");
 
-        Assert.Equal(5, actualList.Count);
         Assert.Equal(expectedCollection.Count, actualList.Count);
-        Assert.All(expectedCollection, i => Assert.Contains(i, actualList));
     }
 
+    // Failed
     [Fact]
     public void StringToListTest()
     {
@@ -68,11 +67,10 @@ public class ExceptAndToListTest
         var collectionStr = string.Join(" | ", actualList);
         _output.WriteLine($"string list -> {collectionStr}");
 
-        Assert.Equal(5, actualList.Count);
         Assert.Equal(expectedCollection.Count, actualList.Count);
-        Assert.All(expectedCollection, i => Assert.Contains(i, actualList));
     }
 
+    // Failed
     [Fact]
     public void RecordObjectExceptToListTest()
     {
@@ -91,10 +89,30 @@ public class ExceptAndToListTest
 
         string collectionStr = string.Join(" | ", actualList.Select(r => r.IntValue));
         _output.WriteLine($"int list -> {collectionStr}");
-
-
-        Assert.Equal(5, actualList.Count);
+        
         Assert.Equal(expectedCollection.Count, actualList.Count);
-        Assert.All(expectedCollection, i => Assert.Contains(i, actualList));
+    }
+
+    // Failed
+    [Fact]
+    public void RecordObjectExceptWithNonEmptyListToListTest()
+    {
+        IReadOnlyCollection<DummyRecord> expectedCollection = new List<DummyRecord>
+                                                              {
+                                                                  new(1),
+                                                                  new(2),
+                                                                  new(2),
+                                                                  new(3),
+                                                                  new(4)
+                                                              };
+        var dummy1 = new List<DummyRecord>() { new(1) };
+
+        List<DummyRecord> actualList = expectedCollection.Except(dummy1)
+                                                         .ToList();
+
+        string collectionStr = string.Join(" | ", actualList.Select(r => r.IntValue));
+        _output.WriteLine($"int list -> {collectionStr}");
+        
+        Assert.Equal(4, actualList.Count);
     }
 }

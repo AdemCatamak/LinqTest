@@ -14,9 +14,7 @@ public class ToListTest
 
         List<int> actualList = expectedCollection.ToList();
 
-        Assert.Equal(5, actualList.Count);
         Assert.Equal(expectedCollection.Count, actualList.Count);
-        Assert.All(expectedCollection, i => Assert.Contains(i, actualList));
     }
 
     [Fact]
@@ -33,9 +31,7 @@ public class ToListTest
 
         List<DummyClass> actualList = expectedCollection.ToList();
 
-        Assert.Equal(5, actualList.Count);
         Assert.Equal(expectedCollection.Count, actualList.Count);
-        Assert.All(expectedCollection, i => Assert.Contains(i, actualList));
     }
 
     [Fact]
@@ -52,8 +48,6 @@ public class ToListTest
 
         List<DummyRecord> actualList = expectedCollection.ToList();
 
-        Assert.Equal(5, actualList.Count);
         Assert.Equal(expectedCollection.Count, actualList.Count);
-        Assert.All(expectedCollection, i => Assert.Contains(i, actualList));
     }
 }
